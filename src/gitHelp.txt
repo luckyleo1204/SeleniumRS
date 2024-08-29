@@ -1,0 +1,43 @@
+PS C:\Personal\RS_P1> git init
+Initialized empty Git repository in C:/Personal/RS_P1/.git/
+PS C:\Personal\RS_P1> git add *
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pom.xml', LF will be replaced by CRLF the next time Git touches it
+PS C:\Personal\RS_P1> git add *
+PS C:\Personal\RS_P1> git commit -a -m "initialPush"
+[master (root-commit) 13a2492] initialPush
+ Committer: Murali C <murc@publicisgroupe.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 8 files changed, 566 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 .idea/.gitignore
+ create mode 100644 .idea/encodings.xml
+ create mode 100644 .idea/misc.xml
+ create mode 100644 pom.xml
+ create mode 100644 screenShot/1.png
+ create mode 100644 src/test/java/FirstSelenium.java
+ create mode 100644 src/test/java/streamsDemo.java
+PS C:\Personal\RS_P1> git remote add origin https://github.com/luckyleo1204/SeleniumRS.git
+PS C:\Personal\RS_P1> git branch -M seleniumPractice
+PS C:\Personal\RS_P1> git push -u origin seleniumPractice
+info: please complete authentication in your browser...
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (15/15), 184.65 KiB | 10.86 MiB/s, done.
+Total 15 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/luckyleo1204/SeleniumRS.git
+ * [new branch]      seleniumPractice -> seleniumPractice
+branch 'seleniumPractice' set up to track 'origin/seleniumPractice'.
