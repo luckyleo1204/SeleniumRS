@@ -4,13 +4,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import static org.openqa.selenium.support.locators.RelativeLocator.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.swing.plaf.TableHeaderUI;
-import javax.swing.plaf.ToolBarUI;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -19,12 +19,13 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class FirstSelenium {
     public WebDriver driver;
 
     @BeforeTest
     public void init() {
-        ChromeOptions options=new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
         options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -33,7 +34,7 @@ public class FirstSelenium {
 
     @AfterTest
     public void teardown() {
-        driver.quit();
+       driver.quit();
     }
 
     @Test(enabled = false)
@@ -350,10 +351,10 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void sslcertificateDemo() throws InterruptedException {
-      //  ChromeOptions options=new ChromeOptions();
-      //  options.setAcceptInsecureCerts(true);
+        //  ChromeOptions options=new ChromeOptions();
+        //  options.setAcceptInsecureCerts(true);
         //driver = new ChromeDriver(options);
         // refer for https://developer.chrome.com/docs/chromedriver/capabilities, setting proxy,
 
@@ -379,29 +380,120 @@ public class FirstSelenium {
     public void getScreenShot() throws IOException {
 
         driver.get("https:/www.google.com");
-        File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(src,new File("C:\\Personal\\RS_P1\\screenShot\\1.png"));
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(src, new File("C:\\Personal\\RS_P1\\screenShot\\1.png"));
 
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void validateListisSortedornot() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
         driver.findElement(By.xpath("//tr/th[1]")).click();
-        List<WebElement> elements=driver.findElements(By.xpath("//tr/td[1]"));
-        List<String> originalList=elements.stream().map(n->n.getText()).collect(Collectors.toList());
-        List<String> sortedList=originalList.stream().sorted().collect(Collectors.toList());
-        Assert.assertEquals(originalList,sortedList);
+        List<WebElement> elements = driver.findElements(By.xpath("//tr/td[1]"));
+        List<String> originalList = elements.stream().map(n -> n.getText()).collect(Collectors.toList());
+        List<String> sortedList = originalList.stream().sorted().collect(Collectors.toList());
+        Assert.assertEquals(originalList, sortedList);
 
         //print the price of Beans from the list.
 
-       List<String> price= elements.stream().filter(n->n.getText().contains("Beans")).map(n->getPrice(n)).collect(Collectors.toList());
-        price.forEach(s-> System.out.println(s));
+        List<String> price = elements.stream().filter(n -> n.getText().contains("Beans")).map(n -> getPrice(n)).collect(Collectors.toList());
+        price.forEach(s -> System.out.println(s));
 
     }
 
+    @Test(enabled = false)
+    public void paginationDemo() throws InterruptedException {
+        //driver.get("https://rahulshettyacademy.com/greenkart/#/offers");
+        driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+        Thread.sleep(2000);
+
+// click on column
+
+        driver.findElement(By.xpath("//tr/th[1]")).click();
+
+
+// capture all webelements into list
+
+        List<WebElement> elementsList = driver.findElements(By.xpath("//tr/td[1]"));
+
+
+// capture text of all webelements into new(original) list
+
+        List<String> originalList = elementsList.stream().map(s -> s.getText()).collect(Collectors.toList());
+
+
+// sort on the original list of step 3 -> sorted list
+
+
+        List<String> sortedList = originalList.stream().sorted().collect(Collectors.toList());
+
+// compare original list vs sorted list
+
+        Assert.assertTrue(originalList.equals(sortedList));
+
+        List<String> price;
+
+// scan the name column with getText ->Beans->print the price of the Rice
+
+        do {
+
+            List<WebElement> rows = driver.findElements(By.xpath("//tr/td[1]"));
+
+            price = rows.stream().filter(s -> s.getText().contains("Rice"))
+
+                    .map(s -> getPriceVeggie(s)).collect(Collectors.toList());
+
+            price.forEach(a -> System.out.println(a));
+
+            if (price.size() < 1) {
+
+                driver.findElement(By.cssSelector("[aria-label='Next']")).click();
+
+            }
+
+        } while (price.size() < 1);
+
+
+    }
+
+    private static String getPriceVeggie(WebElement s) {
+
+// TODO Auto-generated method stub
+
+        String pricevalue = s.findElement(By.xpath("following-sibling::td[1]")).getText();
+
+
+        return pricevalue;
+
+    }
+
+
+    @Test(enabled = false)
+    public void searchDemo() throws InterruptedException {
+        driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+        Thread.sleep(2000);
+        String item = "Rice";
+        driver.findElement(By.id("search-field")).sendKeys(item);
+        List<WebElement> items = driver.findElements(By.xpath("//tr/td[1]"));
+        List<WebElement> filteredlist = items.stream().filter(s -> s.getText().contains(item)).collect(Collectors.toList());
+        Assert.assertEquals(items.size(), filteredlist.size());
+    }
+
+    @Test(enabled = true)
+    public void RelativeLocatorsDemo() throws InterruptedException {
+        driver.get("https://rahulshettyacademy.com/angularpractice/");
+        Thread.sleep(2000);
+        WebElement nameEditBox=driver.findElement(By.name("name"));
+        System.out.println(driver.findElement(with(By.tagName("label")).above(nameEditBox)).getText());
+
+        WebElement dateofBirth=driver.findElement(By.xpath("//label[@for=\"dateofBirth\"]"));
+        driver.findElement(with(By.tagName("input")).below(dateofBirth)).click();
+
+    }
+
+
     private String getPrice(WebElement n) {
-        return  n.findElement(By.xpath("following-sibling::td[1]")).getText();
+        return n.findElement(By.xpath("following-sibling::td[1]")).getText();
     }
 
 
