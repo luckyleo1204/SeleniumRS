@@ -6,9 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import static org.openqa.selenium.support.locators.RelativeLocator.*;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 import java.io.File;
@@ -23,7 +21,7 @@ import java.util.stream.Collectors;
 public class FirstSelenium {
     public WebDriver driver;
 
-    @BeforeTest
+    @BeforeClass
     public void init() {
         ChromeOptions options = new ChromeOptions();
         options.setAcceptInsecureCerts(true);
@@ -32,12 +30,12 @@ public class FirstSelenium {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(20000));
     }
 
-    @AfterTest
+    @AfterClass
     public void teardown() {
        driver.quit();
     }
 
-    @Test(enabled = false)
+    @Test()
     public void practice1() throws IOException {
         driver.get("https://www.google.com");
         List<WebElement> list = driver.findElements(By.tagName("a"));
@@ -48,7 +46,7 @@ public class FirstSelenium {
         }
     }
 
-    @Test(enabled = false)
+    @Test()
     public void staticalDropdownDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         WebElement dd = driver.findElement(By.name("ctl00$mainContent$DropDownListCurrency"));
@@ -66,7 +64,7 @@ public class FirstSelenium {
         Thread.sleep(1000);
     }
 
-    @Test(enabled = false)
+    @Test()
     public void advanceDropDown() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         Thread.sleep(5000);
@@ -80,7 +78,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void dynamicDropDown() throws InterruptedException {
         driver.get("https://www.spicejet.com/");
         Thread.sleep(20000);
@@ -95,7 +93,7 @@ public class FirstSelenium {
         Thread.sleep(1000);
     }
 
-    @Test(enabled = false)
+    @Test()
     public void autoSuggestDropDown() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         Thread.sleep(2000);
@@ -110,7 +108,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void calendearDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         Thread.sleep(2000);
@@ -121,7 +119,7 @@ public class FirstSelenium {
         Assert.assertEquals(cdate, "29");
     }
 
-    @Test(enabled = false)
+    @Test()
     public void checkEnabledorDisabled() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         Thread.sleep(2000);
@@ -135,7 +133,7 @@ public class FirstSelenium {
         }
     }
 
-    @Test(enabled = false)
+    @Test()
     public void alertDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         Thread.sleep(2000);
@@ -149,7 +147,7 @@ public class FirstSelenium {
         driver.switchTo().alert().dismiss();
     }
 
-    @Test(enabled = false)
+    @Test()
     public void cartDemo() throws InterruptedException {
         String[] itemsNeeded = {"Cucumber", "Brocolli", "Beetroot"};
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
@@ -200,7 +198,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void actionDemo1() throws InterruptedException {
         driver.get("https://www.amazon.in/");
         Thread.sleep(2000);
@@ -211,7 +209,7 @@ public class FirstSelenium {
         Thread.sleep(2000);
     }
 
-    @Test(enabled = false)
+    @Test()
     public void actionDemo2() throws InterruptedException, IOException {
         driver.get("https://rahulshettyacademy.com/loginpagePractise/");
         driver.findElement(By.cssSelector("a.blinkingText")).click();
@@ -235,7 +233,7 @@ public class FirstSelenium {
         driver.findElement(By.id("username")).sendKeys(email);
     }
 
-    @Test(enabled = false)
+    @Test()
     public void framesDemo() throws InterruptedException {
         driver.get("https://jqueryui.com/droppable/");
         Thread.sleep(2000);
@@ -253,7 +251,7 @@ public class FirstSelenium {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void limitDriverScopeforFooter() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         Thread.sleep(2000);
@@ -268,7 +266,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void caleanderUI() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
         Thread.sleep(5000);
@@ -287,7 +285,7 @@ public class FirstSelenium {
         }
     }
 
-    @Test(enabled = false)
+    @Test(groups = "smoketest")
     public void caleanderUIDemo() {
         String monthNumber = "6";
 
@@ -322,7 +320,7 @@ public class FirstSelenium {
     }
 
 
-    @Test(enabled = false)
+    @Test( groups = "smoketest")
     public void JavaScriptExecutorDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         Thread.sleep(2000);
@@ -332,7 +330,7 @@ public class FirstSelenium {
         js.executeScript("document.querySelector('.tableFixHead').scrollTop=5000");
     }
 
-    @Test(enabled = false)
+    @Test()
     public void webTable() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         Thread.sleep(2000);
@@ -351,7 +349,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void sslcertificateDemo() throws InterruptedException {
         //  ChromeOptions options=new ChromeOptions();
         //  options.setAcceptInsecureCerts(true);
@@ -376,7 +374,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void getScreenShot() throws IOException {
 
         driver.get("https:/www.google.com");
@@ -385,7 +383,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void validateListisSortedornot() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
         driver.findElement(By.xpath("//tr/th[1]")).click();
@@ -401,7 +399,7 @@ public class FirstSelenium {
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void paginationDemo() throws InterruptedException {
         //driver.get("https://rahulshettyacademy.com/greenkart/#/offers");
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
@@ -468,7 +466,7 @@ public class FirstSelenium {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void searchDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
         Thread.sleep(2000);
@@ -479,7 +477,7 @@ public class FirstSelenium {
         Assert.assertEquals(items.size(), filteredlist.size());
     }
 
-    @Test(enabled = true)
+    @Test()
     public void RelativeLocatorsDemo() throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/angularpractice/");
         Thread.sleep(2000);
@@ -488,6 +486,36 @@ public class FirstSelenium {
 
         WebElement dateofBirth=driver.findElement(By.xpath("//label[@for=\"dateofBirth\"]"));
         driver.findElement(with(By.tagName("input")).below(dateofBirth)).click();
+
+        WebElement checkboxLabel=driver.findElement(By.cssSelector(".form-check-label"));
+        driver.findElement(with(By.tagName("input")).toLeftOf(checkboxLabel)).click();
+
+        WebElement radiobutton=driver.findElement(By.id("inlineRadio1"));
+        System.out.println(driver.findElement(with(By.tagName("label")).toRightOf(radiobutton)).getText());
+
+    }
+
+    @Test()
+    public void multipleWindowsTabs() throws InterruptedException, IOException {
+        driver.get("https://rahulshettyacademy.com/angularpractice/");
+        Thread.sleep(2000);
+        driver.switchTo().newWindow((WindowType.TAB));
+        Set<String> wins=driver.getWindowHandles();
+        Iterator<String> it=wins.iterator();
+        String parent=it.next();
+        String child=it.next();
+        driver.switchTo().window(child);
+        driver.get("https://rahulshettyacademy.com");
+        String courseName=driver.findElement(By.xpath("(//h2/a)[1]")).getText();
+        driver.switchTo().window(parent);
+        WebElement name= driver.findElement(By.name("name"));
+        name.sendKeys(courseName);
+        File file=name.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("C://Personal//RS_P1//screenShot//2.png"));
+        //get height and width of an element.
+        System.out.println(name.getRect().getHeight());
+        System.out.println(name.getRect().getWidth());
+
 
     }
 

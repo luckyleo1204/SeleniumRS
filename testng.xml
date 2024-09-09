@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1">
+<!--    <test name="Nopackage">-->
+<!--        <classes>-->
+<!--            <class name="NoPackageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Regression">
+        <classes>
+            <class name="testNg.FirstTestNgDemo">
+                 <methods>
+                     <include name="Mobile.*"/>
+                 </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="sanity">
+            <classes>
+            <class name="FirstSelenium">
+                <methods>
+                    <include name="staticalDropdownDemo"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
