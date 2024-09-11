@@ -208,6 +208,78 @@ public class JavaPractice {
                 .parallel()
                 .forEachOrdered( action );
     }
+
+    @Test
+    public void findDuplicateChar(){
+        String input="AUTOMATION";
+        HashMap<Character, Integer> hm=new HashMap<Character,Integer>();
+        char[] charArray=input.toCharArray();
+        for(char c:charArray)
+        {
+            if(hm.containsKey(c))
+            {
+                hm.put(c, hm.get(c)+1);
+            }
+            else
+            {
+                hm.put(c,1);
+            }
+        }
+
+        for(char i:hm.keySet())
+        {
+            System.out.println(i+":"+hm.get(i));
+        }
+
+        System.out.println("\n===========================\n");
+
+        Map<Character, Long> mp=input.chars()  // Convert the string to an IntStream of character codes
+                .mapToObj(c -> (char) c)  // Convert character codes to characters
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        mp.forEach((character, count) -> System.out.println(character + ": " + count));
+
+    }
+
+    @Test
+    public void isPalornot(){
+        String str="MALAYALAM";
+        boolean ispal=true;
+        int n= str.length();
+        for(int i=0;i<n/2;i++){
+            if(str.charAt(i)!=str.charAt(n-i-1)){
+                ispal=false;
+                break;
+            }
+        }
+        if(ispal==true)
+            System.out.println("String is Palindrome");
+        else
+            System.out.println("String is not Palindrome");
+
+        System.out.println("\n=====================Approach 2==========================\n");
+
+        String reverse=new StringBuilder(str).reverse().toString();
+        if(!str.equals(reverse))
+             System.out.println("is not pal");
+        else
+            System.out.println("is pal string");
+    }
+
+    @Test
+    public void FirstNonRepatative(){
+
+        String str="swiss";
+        Map<Character, Integer> map=new LinkedHashMap<>();
+        for(char i: str.toCharArray()){
+            map.put(i,map.getOrDefault(i, 0)+1);
+        }
+        for(Map.Entry<Character,Integer> j: map.entrySet()){
+            if(j.getValue()==1) {
+                System.out.println(j.getKey());
+                break;
+            }
+        }
+    }
 }
 
 

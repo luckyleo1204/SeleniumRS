@@ -33,19 +33,45 @@ public class FirstTestNgDemo {
         System.out.println("hi");
     }
 
-    @Test(dependsOnMethods = "demo")
+    @Test()
     public void MobileDemo1(){
         System.out.println("hi");
     }
 
-    @Test(dependsOnGroups = "smoketest")
+    @Test()
     public void Mobiledemo2(){
         System.out.println("hi");
     }
 
 
-    @Test(priority = 0)
-    public void Seconddemo2(){
-        System.out.println("hi");
+    @Test(dataProvider="testData")
+    public void Seconddemo2(String uname, String pwd){
+        System.out.println(uname);
+        System.out.println(pwd);
+    }
+
+
+    @DataProvider(name = "testData")
+    public Object[][] dataProvider(){
+        Object[] [] obj=new Object[3][2];
+        obj[0][0]="user0";
+        obj[0][1]="pass0";
+
+        obj[1][0]="user1";
+        obj[1][1]="pass1";
+
+        obj[2][0]="user2";
+        obj[2][1]="pass2";
+        return obj;
+
+
+
+    }
+
+
+    @Parameters({"url"})
+    @Test
+    public void parameterDemo(String param){
+        System.out.println(param);
     }
 }
