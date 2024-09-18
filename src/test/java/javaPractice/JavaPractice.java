@@ -1,3 +1,6 @@
+package javaPractice;
+
+import io.cucumber.java.sl.In;
 import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -274,12 +277,32 @@ public class JavaPractice {
             map.put(i,map.getOrDefault(i, 0)+1);
         }
         for(Map.Entry<Character,Integer> j: map.entrySet()){
-            if(j.getValue()==1) {
-                System.out.println(j.getKey());
-                break;
-            }
+
+                System.out.println(j.getKey()+":"+j.getValue());
+
         }
     }
+
+    @Test
+    public void maxinArray(){
+        int[] arr={25,20,15,5,10,35};
+//        Arrays.sort(arr);
+        int target=45;
+        int[] arrb = new int[arr.length];
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++) {
+                  if (arr[i] + arr[j] == target) {
+                    arrb[i] = arr[i];
+                    arrb[j] = arr[j];
+                    break;
+                }
+            }
+        }
+       Arrays.stream(arrb).forEach(System.out::print);
+    }
+
+
+
 }
 
 

@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Grid Demo" verbose="1" parallel="classes">
+    <test name="Grid Tests">
+        <classes>
+            <class name="Grid.googleTest"/>
+            <class name="Grid.RSATest"/>
+            </classes>
+    </test>
+</suite>
