@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static java.util.Collections.swap;
 
 public class jsonSchemaValidator {
 
@@ -23,6 +24,21 @@ public class jsonSchemaValidator {
                  assertThat().body(matchesJsonSchemaInClasspath("schema.json"))
                  .statusCode(200)
                  .log().all();
+
+    }
+
+
+
+    @Test
+    public void swapDemo(){
+
+    }
+
+    private void swapNumber(int a, int b) {
+        int temp;
+        temp=a;
+        a=b;
+        b=temp;
 
     }
 }

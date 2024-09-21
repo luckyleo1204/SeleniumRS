@@ -20,7 +20,14 @@ import java.util.stream.Collectors;
 
 public class FirstSelenium {
     public WebDriver driver;
-
+/*  NoteS:
+nodename	Selects all nodes with the name "nodename"
+/	Selects from the root node
+//	Selects nodes in the document from the current node that match the selection no matter where they are
+.	Selects the current node
+..	Selects the parent of the current node
+@	Selects attributes
+ */
     @BeforeClass
     public void init() {
         ChromeOptions options = new ChromeOptions();
@@ -531,4 +538,18 @@ public class FirstSelenium {
         connect.connect();
         return status = connect.getResponseMessage();
     }
-}
+
+    @Test
+    public void getPlayerName() throws InterruptedException {
+        driver.get("https://www.google.com/search?q=ind+vs+ban");
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("(//*[text()='376'])[1]")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("(//*[text()='1st Inn'])[1]")).click();
+        Thread.sleep(5000);
+        driver.findElements(By.xpath("(//table[@class=\"imspo_tps__tb\"])[1]/tbody/tr/td[5]/span[text()>'1']/preceding::td[5]/table/tbody/tr/td/div/div"))
+                .stream().map(n->n.getText()).forEach(System.out::println);
+
+        }
+
+    }
