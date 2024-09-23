@@ -2,7 +2,7 @@
 
 <suite name="Suite1"  parallel="tests" thread-count="2" verbose="1">
     <listeners> 
-        <listener class-name="testNg.ListnersDemo"></listener>
+        <listener class-name="utility.Listeners"></listener>
     </listeners>
 <!--    <test name="Nopackage">-->
 <!--        <classes>-->
@@ -12,10 +12,10 @@
 
     <test name="Regression">
         <classes>
-            <class name="testNg.FirstTestNgDemo">
-                 <methods>
-                     <include name="Mobile.*"/>
-                 </methods>
+            <class name="FirstSelenium">
+<!--                 <methods>-->
+<!--                     <include name="Mobile.*"/>-->
+<!--                 </methods>-->
             </class>
         </classes>
     </test>

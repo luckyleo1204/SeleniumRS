@@ -1,12 +1,10 @@
 package RestAssured.tests;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import netscape.javascript.JSObject;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -44,6 +42,15 @@ public class FirstAPITest {
         baseURI = "https://reqres.in/api";
         given().get("/users?page=2").
                 then().statusCode(200).body("data.first_name[1]",equalTo("Lindsay")).log().all();
+    }
+
+    @Test
+    public void test4_get(){
+        when().get("https://reqres.in/api/users?page=2")
+                .then()
+                .statusCode(200)
+                .body("page",equalTo(2))
+                .log().all();
     }
 
 

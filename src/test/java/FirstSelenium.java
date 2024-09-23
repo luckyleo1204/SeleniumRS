@@ -6,7 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import static org.openqa.selenium.support.locators.RelativeLocator.*;
 import org.testng.Assert;
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.*;
+import utility.Retry;
 
 
 import java.io.File;
@@ -502,7 +504,7 @@ nodename	Selects all nodes with the name "nodename"
 
     }
 
-    @Test()
+    @Test(retryAnalyzer = Retry.class)  //retry this test multiple times.
     public void multipleWindowsTabs() throws InterruptedException, IOException {
         driver.get("https://rahulshettyacademy.com/angularpractice/");
         Thread.sleep(2000);
@@ -550,6 +552,36 @@ nodename	Selects all nodes with the name "nodename"
         driver.findElements(By.xpath("(//table[@class=\"imspo_tps__tb\"])[1]/tbody/tr/td[5]/span[text()>'1']/preceding::td[5]/table/tbody/tr/td/div/div"))
                 .stream().map(n->n.getText()).forEach(System.out::println);
 
+        }
+
+        @Test(enabled = true)
+        public void Actions_P1() throws InterruptedException {
+
+        driver.get("https://www.browserstack.com/");
+        Thread.sleep(5000);
+        WebElement element=driver.findElement(By.xpath("//*[text()='Get started free']"));
+        Actions actions=new Actions(driver);
+        actions.moveToElement(element).click();
+
+        }
+
+        @Test(enabled = true)
+    public void Actions_p2() throws InterruptedException {
+            driver.get("https://www.browserstack.com/");
+
+((JavascriptExecutor) driver).executeScript("scroll(0,300)");
+
+Actions ac = new Actions(driver);
+
+            WebElement live= driver.findElement(By. cssSelector("div.product-cards-wrapper--click a[title='Live']"));
+            ac.moveToElement(live).build().perform();
+
+            Thread.sleep(3000);
+
+            WebElement automate= driver.findElement(By.cssSelector("div.product-cards-wrapper--click a[title='App Automate']"));
+            automate.click();
+
+            Thread.sleep(2000);
         }
 
     }
