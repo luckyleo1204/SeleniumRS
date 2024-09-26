@@ -302,6 +302,76 @@ public class JavaPractice {
     }
 
 
+    @Test
+    public void compraleDemoDescending(){
+        List<Integer> numberList = List.of(1,2,3,4,5);
+        numberList.stream().filter(n->n%2==0).
+                sorted((i1,i2)->i2.compareTo(i1)).forEach(System.out::print);
+
+    }
+
+    @Test
+    public void getElementAscendingOrder(){
+        List<Integer> numberList = List.of(1,15,20,35,444,52,8);
+        Integer min=numberList.stream().filter(n -> n >= 10).min((i1,i2)->i1.compareTo(i2)).get();
+        System.out.println(min);
+
+        // Withour filter:
+        System.out.println("\n Sorted with Ascending Order without filter\n");
+        numberList.stream().sorted((i1,i2)->i1.compareTo(i2)).forEach(System.out::println);
+
+        System.out.println("\n Sorted with Descending Order without filter\n");
+        numberList.stream().sorted((i1,i2)->i2.compareTo(i1)).forEach(System.out::println);
+
+        System.out.println("\nFind the min\n");
+        Integer minn=numberList.stream().min((i1, i2)->i1.compareTo(i2)).get();
+        System.out.println(minn);
+
+        System.out.println("\nFind the max\n");
+        Integer max=numberList.stream().max((i1, i2)->i1.compareTo(i2)).get();
+        System.out.println(max);
+
+    }
+
+    @Test
+    public void convertStreamtoArray(){
+
+        List<Integer> numberList = List.of(1,15,20,35,444,52,8);
+        Object[] objArray=numberList.stream().filter(n -> n >= 10).toArray();
+        for(Object i: objArray)
+            System.out.println(i);
+
+    }
+
+    @Test
+    public void getNthMaxUsingStream(){
+        Map<String, Integer> map = new HashMap<>();
+        map.put("Abrar", 30000);
+        map.put("Chand", 80000);
+        map.put("kalam", 70000);
+        map.put("Raheem", 25000);
+        map.put("Kiran", 63000);
+        map.put("Esa", 45000);
+        int n = 2;
+        Map.Entry<String, Integer> res
+                = getNthHighestSalary(map, n);
+        System.out.println(res.getValue() + " = [ "
+                + res.getKey() + " ]");
+    }
+
+    public static Map.Entry<String, Integer> getNthHighestSalary(Map<String, Integer> map, int n) {
+
+        return map.entrySet()
+                .stream() // Use Stream API to sort the entries
+                // by salary in descending order
+                .sorted(Collections.reverseOrder(
+                        Map.Entry.comparingByValue()))
+                .collect(
+                        Collectors.toList()) // Collect the sorted
+                // entries into a List
+                .get(n - 1); // Get the nth element from the list
+    }
+
 
 }
 
