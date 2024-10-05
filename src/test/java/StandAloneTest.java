@@ -17,7 +17,7 @@ import PageObject.LandingPage;
 
 public class StandAloneTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
 		String productName = "ZARA COAT 3";
@@ -42,7 +42,9 @@ public class StandAloneTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 		//ng-animating
 		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(".ng-animating"))));
-		driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
+		Thread.sleep(2000);
+		//driver.findElement(By.cssSelector("[routerlink*='/dashboard/cart']")).click();
+		driver.findElement(By.xpath("(//button[@class=\"btn btn-custom\"])[3]")).click();
 		
 		List <WebElement> cartProducts = driver.findElements(By.cssSelector(".cartSection h3"));		
 	Boolean match = 	cartProducts.stream().anyMatch(cartProduct-> cartProduct.getText().equalsIgnoreCase(productName));
@@ -53,7 +55,7 @@ public class StandAloneTest {
 		js.executeScript("arguments[0].click();", driver.findElement(By.xpath("(//button[@class=\"btn btn-primary\"])[3]")));
 
 	//driver.findElement(By.xpath("(//button[@class=\"btn btn-primary\"])[3]")).click();
-	
+	Thread.sleep(3000);
 	Actions a = new Actions(driver);
 	a.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")), "india").build().perform();
 	
@@ -66,63 +68,7 @@ public class StandAloneTest {
 	Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 	driver.close();
 	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

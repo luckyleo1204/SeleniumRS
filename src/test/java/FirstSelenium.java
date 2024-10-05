@@ -11,6 +11,7 @@ import org.testng.annotations.*;
 import utility.Retry;
 
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -18,6 +19,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class FirstSelenium {
@@ -582,6 +584,20 @@ Actions ac = new Actions(driver);
             automate.click();
 
             Thread.sleep(2000);
+        }
+
+
+        @Test
+    public void webTableDemo() throws InterruptedException {
+        driver.get("https://money.rediff.com/gainers/bse/daily/groupa?src=gain_lose");
+        Thread.sleep(2000);
+        List<WebElement> al=driver.findElements(By.xpath("//table[@class=\"dataTable\"]/tbody/tr/td[5]/font"));
+
+        for(int i=0;i<al.size();i++){
+            System.out.println(al.get(i).getText());
+            System.out.println(al.get(i).findElement(By.xpath("//ancestor::tr/td[1]")).getText());
+        }
+
         }
 
     }

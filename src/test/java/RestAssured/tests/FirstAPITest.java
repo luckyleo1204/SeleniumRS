@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,6 +104,9 @@ public class FirstAPITest {
                 put("/users/2");
         System.out.println(res.statusCode());
         System.out.println(res.prettyPrint());
+        System.out.println("\n======================================\n");
+        System.out.println(res.getBody().jsonPath().get("job").toString());
+        System.out.println("\n======================================\n");
     }
 
     @Test
@@ -118,6 +123,8 @@ public class FirstAPITest {
                 patch("/users/2");
         System.out.println(res.statusCode());
         System.out.println(res.prettyPrint());
+
+
     }
 
     @Test
@@ -156,5 +163,52 @@ public class FirstAPITest {
                 .then().log().all();
 
     }
+
+    @Test
+    public void testPost1(){
+        baseURI="https://reqres.in/api";
+
+        Response res=
+                get("https://reqres.in/api/users");
+
+
+
+        System.out.println(res.prettyPrint());
+
+        JSONObject request=new JSONObject();
+
+        request.put("first_name", "Madhu");
+        request.put("last_name","Software");
+        request.put("email","abcd@google.com");
+
+
+        Response res1= given().
+                header("Content-Type","application/json")
+                .contentType("application/json")
+                .accept(ContentType.JSON)
+                .body(request.toJSONString()).
+                when().
+                post("/users");
+        System.out.println(res1.statusCode());
+        System.out.println(res1.prettyPrint());
+        System.out.println("\n======================================\n");
+
+
+    }
+
+    @Test
+    public void interviewQuestion1(){
+        Response res=
+                get("https://reqres.in/api/users");
+        res.prettyPrint();
+        System.out.println("\n======================================\n");
+       Arrays.stream(Arrays.stream(res.getBody().jsonPath().get("data.first_name")
+                .toString().split(" ")).toList().toString().split(",")).toList().forEach(System.out::println);
+
+        System.out.println("\n======================================\n");
+
+        System.out.println(res.getBody().jsonPath().get("data").toString());
+    }
+
 
 }

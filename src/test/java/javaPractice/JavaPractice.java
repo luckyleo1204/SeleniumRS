@@ -2,6 +2,7 @@ package javaPractice;
 
 import io.cucumber.java.sl.In;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.poifs.filesystem.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,6 +16,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -353,10 +355,56 @@ public class JavaPractice {
         map.put("Kiran", 63000);
         map.put("Esa", 45000);
         int n = 2;
-        Map.Entry<String, Integer> res
-                = getNthHighestSalary(map, n);
-        System.out.println(res.getValue() + " = [ "
-                + res.getKey() + " ]");
+//        Map.Entry<String, Integer> res
+//                = getNthHighestSalary(map, n);
+//        System.out.println(res.getValue() + " = [ "
+//                + res.getKey() + " ]");
+
+
+        Map.Entry<String, Integer> res1=
+                map.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).collect(Collectors.toList()).get(n-1);
+        System.out.println(res1.getValue()+"=["+res1.getKey()+"]");
+    }
+
+
+    @Test
+    public void ReverseOrder(){
+        List<Integer> l= Arrays.asList(10,20,30,44,25,13);
+       l.stream().sorted((i1,i2)->i2.compareTo(i1)).forEach(n-> System.out.println(n));
+    }
+
+
+    @Test
+    public void maptoList(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("java", 20);
+        map.put("C++", 45);
+
+        List<String> list = new ArrayList<String>(map.keySet());
+        List<Integer> l2=new ArrayList<>(map.values());
+        System.out.println(list+ ":"+l2);
+
+
+        HashMap<String, Integer> map1
+                = new HashMap<>();
+
+        // Add elements to the map
+        map1.put("vishal", 10);
+        map1.put("sachin", 30);
+        map1.put("vaibhav", 20);
+
+        // Set of the entries from the
+        // HashMap
+        Set<Map.Entry<String, Integer> > entrySet
+                = map1.entrySet();
+
+        // Creating an ArrayList of Entry objects
+        ArrayList<Map.Entry<String, Integer> > listOfEntry
+                = new ArrayList<Map.Entry<String, Integer> >(entrySet);
+
+        System.out.println(listOfEntry);
+
+
     }
 
     public static Map.Entry<String, Integer> getNthHighestSalary(Map<String, Integer> map, int n) {
@@ -370,6 +418,55 @@ public class JavaPractice {
                         Collectors.toList()) // Collect the sorted
                 // entries into a List
                 .get(n - 1); // Get the nth element from the list
+    }
+
+    @Test
+    public void anagram(){
+        System.out.println(isAnagram("anagram", "managra"));
+
+    }
+
+    public static boolean isAnagram(String a, String b){
+            a=a.toLowerCase();
+            b=b.toLowerCase();
+            char[] ch1=a.toCharArray();
+            char[] ch2=b.toCharArray();
+            Arrays.sort(ch1);
+            Arrays.sort(ch2);
+            String s1=new String(ch1);
+            String s2=new String(ch2);
+        return s1.equals(s2);
+    }
+
+    @Test
+    public void splitDemo(){
+        String str="He is a very very good boy, isn't he?";
+        str=str.trim();
+        if(str.length()==0){
+            System.out.println(0);
+            return;
+        }
+        String[] words= str.split("[^a-zA-Z]+");
+        System.out.println(words.length);
+        for(String word: words){
+            System.out.println(word);
+        }
+    }
+
+    @Test
+    public void pattern(){
+        Scanner sc=new Scanner(System.in);
+        int testcases=Integer.parseInt(sc.nextLine());
+        while(testcases>0){
+            String pattern=sc.nextLine();
+            try{
+                Pattern p= Pattern.compile(pattern);
+                System.out.println("Valid");
+            }catch (Exception e){
+                System.out.println("Invalid");
+            }
+            testcases--;
+        }
     }
 
 
