@@ -1,8 +1,6 @@
 package javaPractice;
 
-import io.cucumber.java.sl.In;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.poifs.filesystem.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,11 +14,14 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaPractice {
+
+
     @Test
     public void findNumberOfOccurance(){
         String str="TESTING";
@@ -468,6 +469,46 @@ public class JavaPractice {
             testcases--;
         }
     }
+
+    @Test
+    public void userNameValidation(){
+        String str="murali1";
+        final String regularExpression="^[a-zA-Z][a-zA-Z0-9_]{7,29}";
+        if(str.matches(regularExpression)){
+            System.out.println("Valid");
+        }else{
+            System.out.println("Not Valid");
+        }
+
+    }
+
+    @Test
+    public void MultipleArray(){
+       List<Integer> al= Arrays.asList(1,2,3,4,5);
+       Optional<Integer> output=al.stream().reduce((a,b)->a*b);
+       if(output.isPresent()){
+           System.out.println("Multiplication is present\t"+ output.get());
+       }else{
+           System.out.println("Not Found");
+       }
+    }
+
+
+    @Test
+    public void reuseSameStream(){
+        String[] inputArray={"Amit","Ball","call","Amit","Doll","egg"};
+//        Stream<String> inputStream=al.stream();
+//        inputStream.forEach(ex-> System.out.println(ex));
+//        System.out.println(inputStream.filter(n->"Amit".equals(n)).count());
+
+        Supplier<Stream<String>> inputstream=()->Stream.of(inputArray);
+        inputstream.get().forEach(ex-> System.out.println(ex));
+        long count=inputstream.get().filter(n->"Amit".equals(n)).count();
+        System.out.println(count);
+
+    }
+
+
 
 
 }
